@@ -29,9 +29,12 @@ $this->load->library('recaptcha');
 </code></pre>
 
 On the website use this inside the form. 
-<code> <?php echo $recaptcha_html; ?> wherever you want the captcha.
 
-Check the REcaptcha with the following when submitted. 
+<code> <?php echo $recaptcha_html; ?> </code>
+
+wherever you want the captcha.
+
+Check the REcaptcha with the following function when submitted. 
 
 Run this code: 
 <pre><code>
@@ -43,11 +46,7 @@ $this->recaptcha->recaptcha_check_answer(
 
 Check if the captcha was correct with: 
 
-<code> 
-$this->recaptcha->is_valid
-
-//Returns TRUE OR FALSE
-</code>
+<code>$this->recaptcha->is_valid</code> (BOOLEAN)
 
 If it returns false, check errors with: 
 
@@ -129,6 +128,7 @@ class Login extends MY_Controller {
 
 Add this to the login webpage template. 
 <pre><code>
+<html><body>
 <form action="login/submit" method="post">
 		    	<span class="loginerror"> <?php if ($this->session->flashdata('error') !== FALSE) { echo $this->session->flashdata('error'); } ?></span>
 		    	<span style="margin-top: 10px;	float: right;">
@@ -146,5 +146,5 @@ Add this to the login webpage template.
 		        </span>
                         <?php echo $recaptcha_html; ?>
 		    </form>
-		    
+		    </html></body>
 </code></pre>
