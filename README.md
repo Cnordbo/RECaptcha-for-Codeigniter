@@ -145,7 +145,7 @@ Add this to the login webpage template.
     <span style="margin-top: 5px;	float: left;">
     <a href="#test" data-toggle="modal">Forgotten password</a>
     </span>
-    ?php echo $recaptcha_html; ?>
+    <?php echo $recaptcha_html; ?>
     </form>
     </html></body>
 ```
