@@ -134,7 +134,7 @@ Add this to the login webpage template.
 		    	<span style="margin-top: 10px;	float: right;">
 		            
 		        </span>
-		        <input  type="text" name="username" placeholder="username" rgb(100, 30, 3)>
+		        <input  type="text" name="username" placeholder="username">
 		 
 		        <input type="password" name="password" placeholder="password">
 		 
