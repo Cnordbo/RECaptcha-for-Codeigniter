@@ -55,7 +55,7 @@ If it returns false, check errors with:
 EXAMPLE CODE
 =============
 
-<pre><code>
+```php
 <?php
 
 class Login extends MY_Controller {
@@ -124,7 +124,8 @@ class Login extends MY_Controller {
 	}//.submit()
 	
 
-}</code></pre>
+}
+```
 
 Add this to the login webpage template. 
 
