@@ -127,24 +127,24 @@ class Login extends MY_Controller {
 }</code></pre>
 
 Add this to the login webpage template. 
-    <pre><code>
+<pre><code>
     <html><body>
     <form action="login/submit" method="post">
-		    	<span class="loginerror"> <?php if ($this->session->flashdata('error') !== FALSE) { echo $this->session->flashdata('error'); } ?></span>
-		    	<span style="margin-top: 10px;	float: right;">
+    <span class="loginerror"> <?php if ($this->session->flashdata('error') !== FALSE) { echo $this->session->flashdata('error'); } ?></span>
+    <span style="margin-top: 10px;	float: right;">
 		            
-		        </span>
-		        <input  type="text" name="username" placeholder="username">
+    </span>
+    <input  type="text" name="username" placeholder="username">
 		 
-		        <input type="password" name="password" placeholder="password">
+    <input type="password" name="password" placeholder="password">
 		 
 		       
 		 
-		        <input type="submit" value="log in">
-		        <span style="margin-top: 5px;	float: left;">
-		            <a href="#test" data-toggle="modal">Forgotten password</a>
-		        </span>
-                        <?php echo $recaptcha_html; ?>
-		    </form>
-		    </html></body>
+    <input type="submit" value="log in">
+    <span style="margin-top: 5px;	float: left;">
+    <a href="#test" data-toggle="modal">Forgotten password</a>
+    </span>
+    ?php echo $recaptcha_html; ?>
+    </form>
+    </html></body>
 </code></pre>
