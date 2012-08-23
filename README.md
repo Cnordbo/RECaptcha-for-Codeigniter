@@ -128,7 +128,7 @@ class Login extends MY_Controller {
 
 Add this to the login webpage template. 
 <pre><code>
-```html
+    ```html
     <html><body>
     <form action="login/submit" method="post">
     <span class="loginerror"> <?php if ($this->session->flashdata('error') !== FALSE) { echo $this->session->flashdata('error'); } ?></span>
