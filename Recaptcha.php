@@ -142,7 +142,6 @@ class Recaptcha {
 
     /**
     * Calls an HTTP POST function to verify if the user's guess was correct
-    * @param string $privkey
     * @param string $remoteip
     * @param string $challenge
     * @param string $response
@@ -199,7 +198,7 @@ class Recaptcha {
     * @param string $domain The domain where the page is hosted
     * @param string $appname The name of your application
     */
-    function recaptcha_get_signup_url ($domain = null, $appname = null) {
+    function recaptcha_get_signup_url ($domain = null, $appname = 'Codeigniter') {
             return "https://www.google.com/recaptcha/admin/create?" .  $this->recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
     }
 

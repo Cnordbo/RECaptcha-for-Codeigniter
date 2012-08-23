@@ -6,7 +6,8 @@ SETUP:
 Add Recaptcha.php to '''application/library'''
 
 Edit line 52-53 to your public and private key obtained from google here: 
- *          https://www.google.com/recaptcha/admin/create
+ *          https://www.google.com/recaptcha/admin/create?domains=&app=Codeigniter
+ *          -> Use this URL for addressing the use of CodeIgniter - so that Google may discover it and host it on their site. 
 
 - Setup is done. 
 
@@ -146,6 +147,7 @@ Add this to the login webpage template.
     <span style="margin-top: 5px;	float: left;">
     <a href="#test" data-toggle="modal">Forgotten password</a>
     </span>
+    <p><a href="<?php echo $this->recaptcha->recaptcha_get_signup_url(); ?>" >Get your API Code HERE</a></p>
     <?php echo $recaptcha_html; ?>
     </form>
     </html></body>
