@@ -50,8 +50,8 @@ class Recaptcha {
     protected $error;
 
     //Remember to obtain the Public and Private key @ https://www.google.com/recaptcha/admin/create
-    protected $public_key = "6Lf8xdoSAAAAAKVRRlhL9fOqOQjNBUrMXv9YtbdC";
-    protected $privkey = "6Lf8xdoSAAAAAL2tEa5bUyziXm-8IupgpPk1QU0_";
+    protected $public_key = "CHANGE_TO_PUBLIC_KEY";
+    protected $privkey = "CHANGE_TO_PRIVATE_KEY";
 
 
     /**
