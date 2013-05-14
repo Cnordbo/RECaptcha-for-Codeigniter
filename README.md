@@ -3,9 +3,9 @@ RECaptcha-for-Codeigniter
 
 SETUP: 
 
-Add Recaptcha.php to '''application/library'''
+Copy Folder config and libraries to ./application
 
-Edit line 52-53 to your public and private key obtained from google here: 
+Edit line ./application/config/recaptcha.php to your public and private key obtained from google here: 
  *          https://www.google.com/recaptcha/admin/create?domains=&app=Codeigniter
  *          -> Use this URL for addressing the use of CodeIgniter - so that Google may discover it and host it on their site. 
 
