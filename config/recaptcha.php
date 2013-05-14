@@ -1,5 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
+ * reCaptcha File Config
+ *
  * File     : recaptcha.php
  * Created  : May 14, 2013 | 4:22:40 PM
  * 
