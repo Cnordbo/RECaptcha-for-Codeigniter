@@ -53,7 +53,18 @@ class Recaptcha {
     protected $public_key = "CHANGE_TO_PUBLIC_KEY";
     protected $privkey = "CHANGE_TO_PRIVATE_KEY";
 
+    function __construct() {
+            log_message('debug', "RECAPTCHA Class Initialized.");
 
+            $this->_ci =& get_instance();
+
+            $this->_ci->load->config('recaptcha');
+
+            $this->public_key   = $this->_ci->config->item('public_key');
+            $this->privkey      = $this->_ci->config->item('private_key');
+            
+    }
+    
     /**
      * Encodes the given data into a query string format
      * @param $data - array of string elements to be encoded
