@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Recaptcha {
     /*
@@ -44,7 +44,6 @@ class Recaptcha {
     const RECAPTCHA_API_SERVER = "http://www.google.com/recaptcha/api";
     const RECAPTCHA_API_SECURE_SERVER = "https://www.google.com/recaptcha/api";
     const RECAPTCHA_VERIFY_SERVER = "www.google.com";
-
 
     protected $is_valid;
     protected $error;
