@@ -47,11 +47,11 @@ $this->recaptcha->recaptcha_check_answer(
 
 Check if the captcha was correct with: 
 
-<code>$this->recaptcha->is_valid</code> (BOOLEAN)
+<code>$this->recaptcha->getIsValid()</code> (BOOLEAN)
 
 If it returns false, check errors with: 
 
-<code>$this->recaptcha->error</code>
+<code>$this->recaptcha->getError()</code>
 
 EXAMPLE CODE
 =============
