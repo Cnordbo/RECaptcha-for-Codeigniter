@@ -49,18 +49,36 @@ class Recaptcha {
     protected $error;
 
     //Remember to obtain the Public and Private key @ https://www.google.com/recaptcha/admin/create
-    protected $public_key = "CHANGE_TO_PUBLIC_KEY";
-    protected $privkey = "CHANGE_TO_PRIVATE_KEY";
+    protected $public_key = "YOUR PUBLIC KEY";
+    protected $privkey = "YOUR PRIVATE KEY";
 
     function __construct() {
             log_message('debug', "RECAPTCHA Class Initialized.");
-
+            
             $this->_ci =& get_instance();
-
+            
+            //Load the CI Config file for recaptcha
             $this->_ci->load->config('recaptcha');
-
+            //load in the values from the config file. 
             $this->public_key   = $this->_ci->config->item('public_key');
             $this->privkey      = $this->_ci->config->item('private_key');
+            
+            //Lets do some basic error handling to see if the configuration is A-OK.
+            $temp_error_msg = '';
+            if ($this->public_key === 'YOUR PUBLIC KEY')
+            {
+                $temp_error_msg .= 'You need to set your public key in the config file <br />';
+            }
+            
+            if ($this->private_key === 'YOUR PRIVATE KEY')
+            {
+                $temp_error_msg .= 'You need to set your private key in the config file <br />';
+            }
+            
+            if ($temp_error_msg != '')
+            {
+                show_error($temp_error_msg);
+            }
             
     }
     
