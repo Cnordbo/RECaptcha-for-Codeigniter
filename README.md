@@ -103,14 +103,14 @@ class Login extends MY_Controller {
                     
                     
                     
-                    if ($username == "user" && $password == "password" && $this->recaptcha->is_valid) {
+                    if ($username == "user" && $password == "password" && $this->recaptcha->getIsValid()) {
                         
                         $this->session->set_userdata('logged_in','yes');
                         $this->session->set_userdata('user_id','test');
                         
                         redirect('');
                     } else {
-                        if(!$this->recaptcha->is_valid) {
+                        if(!$this->recaptcha->getIsValid()) {
                             $this->session->set_flashdata('error','incorrect captcha');
                         } else {
                             $this->session->set_flashdata('error','incorrect credentials');
