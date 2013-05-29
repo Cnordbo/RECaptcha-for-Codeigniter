@@ -1,6 +1,10 @@
 RECaptcha-for-Codeigniter
 =========================
 
+CONTRIBUTE:
+
+You are welcome to contribute to this code! Fork and submit your pull requests as you finish. 
+
 SETUP: 
 
 Copy Folder config and libraries to ./application
