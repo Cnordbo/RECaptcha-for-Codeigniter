@@ -6,7 +6,7 @@ SETUP:
 Copy Folder config and libraries to ./application
 
 Edit ./application/config/recaptcha.php to update public and private key obtained from google here: 
- *          https://www.google.com/recaptcha/admin/create?domains=&app=Codeigniter
+ *          https://www.google.com/recaptcha/admin/create?app=Codeigniter
  *          -> Use this URL for addressing the use of CodeIgniter - so that Google may discover it and host it on their site. 
 
 - Setup is done. 
