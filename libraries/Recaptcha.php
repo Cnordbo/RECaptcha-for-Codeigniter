@@ -70,7 +70,7 @@ class Recaptcha {
                 $temp_error_msg .= 'You need to set your public key in the config file <br />';
             }
             
-            if ($this->private_key === 'YOUR PRIVATE KEY')
+            if ($this->privkey === 'YOUR PRIVATE KEY')
             {
                 $temp_error_msg .= 'You need to set your private key in the config file <br />';
             }
