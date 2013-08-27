@@ -51,6 +51,7 @@ class Recaptcha {
     //Remember to obtain the Public and Private key @ https://www.google.com/recaptcha/admin/create
     protected $public_key = "YOUR PUBLIC KEY";
     protected $privkey = "YOUR PRIVATE KEY";
+    protected $theme = "RECAPTCHA THEME";
 
     function __construct() {
             log_message('debug', "RECAPTCHA Class Initialized.");
@@ -153,7 +154,8 @@ class Recaptcha {
         if ($error) {
             $errorpart = "&amp;error=" . $error;
         }
-        return '<script type="text/javascript" src="'. $server . '/challenge?k=' . $this->public_key . $errorpart . '"></script>
+        return '<script type="text/javascript"> var RecaptchaOptions = { theme : ' . $this->theme . ' }; </script>
+        		<script type="text/javascript" src="'. $server . '/challenge?k=' . $this->public_key . $errorpart . '"></script>
 
             <noscript>
                     <iframe src="'. $server . '/noscript?k=' . $this->public_key . $errorpart . '" height="300" width="500" frameborder="0"></iframe><br/>

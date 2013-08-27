@@ -10,5 +10,7 @@
 
 $config['public_key']   = 'YOUR PUBLIC KEY';
 $config['private_key']  = 'YOUR PRIVATE KEY';
+// Set Recaptcha theme, default red (red/white/blackglass/clean)
+$config['recaptcha_theme']  = 'red';
 
 ?>
