@@ -155,7 +155,7 @@ class Recaptcha {
         if ($error) {
             $errorpart = "&amp;error=" . $error;
         }
-        return '<script type="text/javascript"> var RecaptchaOptions = { theme : ' . $this->theme . ' }; </script>
+        return '<script type="text/javascript"> var RecaptchaOptions = { theme : "' . $this->theme . '" }; </script>
         		<script type="text/javascript" src="'. $server . '/challenge?k=' . $this->public_key . $errorpart . '"></script>
 
             <noscript>
