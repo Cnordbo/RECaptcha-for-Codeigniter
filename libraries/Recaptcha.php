@@ -63,6 +63,7 @@ class Recaptcha {
             //load in the values from the config file. 
             $this->public_key   = $this->_ci->config->item('public_key');
             $this->privkey  = $this->_ci->config->item('private_key');
+            $this->theme  = $this->_ci->config->item('recaptcha_theme');
             
             //Lets do some basic error handling to see if the configuration is A-OK.
             $temp_error_msg = '';
