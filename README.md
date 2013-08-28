@@ -43,6 +43,10 @@ Check the REcaptcha with the following function when submitted.
 
 Run this code: 
 <pre><code>
+$this->recaptcha->recaptcha_check_answer();
+</code></pre>
+Or this, if you have changed fieldnames:
+<pre><code>
 $this->recaptcha->recaptcha_check_answer(
                     $_SERVER['REMOTE_ADDR'],
                     $this->input->post('recaptcha_challenge_field'),
@@ -99,7 +103,7 @@ class Login extends MY_Controller {
 		if ($this->input->post('username') !== FALSE && $this->input->post('password') !== FALSE) 
 		{
 		          //Call to recaptcha to get the data validation set within the class. 
-                    $this->recaptcha->recaptcha_check_answer($_SERVER['REMOTE_ADDR'],$this->input->post('recaptcha_challenge_field'),$this->input->post('recaptcha_response_field'));
+                    $this->recaptcha->recaptcha_check_answer();
                     
                     //Store the username and password for easier access
                     $username = $this->input->post('username');
