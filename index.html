@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Recaptcha-for-codeigniter by Cnordbo</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Recaptcha-for-codeigniter</h1>
+        <h2>Google RECaptcha for Codeigniter</h2>
+        <a href="https://github.com/Cnordbo/RECaptcha-for-Codeigniter" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="recaptcha-for-codeigniter" class="anchor" href="#recaptcha-for-codeigniter"><span class="octicon octicon-link"></span></a>RECaptcha-for-Codeigniter</h1>
+
+<p>CONTRIBUTE:</p>
+
+<p>You are welcome to contribute to this code! Fork and submit your pull requests as you finish. </p>
+
+<p>SETUP: </p>
+
+<p>Copy Folder config and libraries to ./application</p>
+
+<p>Edit ./application/config/recaptcha.php to update public and private key obtained from google here: </p>
+
+<ul>
+<li>         <a href="https://www.google.com/recaptcha/admin/create?app=Codeigniter">https://www.google.com/recaptcha/admin/create?app=Codeigniter</a>
+</li>
+<li>         -&gt; Use this URL for addressing the use of CodeIgniter - so that Google may discover it and host it on their site. </li>
+</ul><ul>
+<li>Setup is done. </li>
+</ul><h1>
+<a name="how-it-works-" class="anchor" href="#how-it-works-"><span class="octicon octicon-link"></span></a>HOW IT WORKS: </h1>
+
+<p>Load using CI: 
+<code>$this-&gt;load-&gt;library('recaptcha');</code></p>
+
+<p>Get the HTML for the recaptcha: 
+<code> $this-&gt;recaptcha-&gt;recaptcha_get_html();</code></p>
+
+<p>ex. </p>
+
+<pre><code>
+$this-&gt;load-&gt;library('recaptcha');
+                    $data['recaptcha_html'] = $this-&gt;recaptcha-&gt;recaptcha_get_html();
+                    $data['page'] = 'login/login';
+                    $this-&gt;load-&gt;view(plane,$data);
+</code></pre>
+
+<p>On the website use this inside the form. </p>
+
+<p><code> &lt;?php echo $recaptcha_html; ?&gt; </code></p>
+
+<p>wherever you want the captcha.</p>
+
+<p>Check the REcaptcha with the following function when submitted. </p>
+
+<p>Run this code: </p>
+
+<pre><code>
+$this-&gt;recaptcha-&gt;recaptcha_check_answer();
+</code></pre>
+
+<p>Or this, if you have changed fieldnames:</p>
+
+<pre><code>
+$this-&gt;recaptcha-&gt;recaptcha_check_answer(
+                    $_SERVER['REMOTE_ADDR'],
+                    $this-&gt;input-&gt;post('recaptcha_challenge_field'),
+                    $this-&gt;input-&gt;post('recaptcha_response_field'));
+</code></pre>
+
+<p>Check if the captcha was correct with: </p>
+
+<p><code>$this-&gt;recaptcha-&gt;getIsValid()</code> (BOOLEAN)</p>
+
+<p>If it returns false, check errors with: </p>
+
+<p><code>$this-&gt;recaptcha-&gt;getError()</code></p>
+
+<h1>
+<a name="example-code" class="anchor" href="#example-code"><span class="octicon octicon-link"></span></a>EXAMPLE CODE</h1>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">class</span> <span class="nc">Login</span> <span class="k">extends</span> <span class="nx">MY_Controller</span> <span class="p">{</span>
+
+    <span class="k">function</span>  <span class="nf">__construct</span><span class="p">()</span>  <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+    <span class="p">}</span>
+        <span class="c1">//Loads the login form if the user isnt logged in - redirects to root folder elseif. </span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+
+           <span class="c1">//Checks to see if the user is logged in</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">(</span><span class="s1">'logged_in'</span><span class="p">)</span> <span class="o">==</span> <span class="k">false</span><span class="p">)</span>
+        <span class="p">{</span>
+
+                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">'recaptcha'</span><span class="p">);</span>
+
+                    <span class="c1">//Store the captcha HTML for correct MVC pattern use.</span>
+                    <span class="nv">$data</span><span class="p">[</span><span class="s1">'recaptcha_html'</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">recaptcha</span><span class="o">-&gt;</span><span class="na">recaptcha_get_html</span><span class="p">();</span>
+
+                    <span class="nv">$data</span><span class="p">[</span><span class="s1">'page'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'login/login'</span><span class="p">;</span>
+                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">'login_template'</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span> 
+
+
+
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="c1">//Gets called by the submit-form</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">submit</span><span class="p">()</span> <span class="p">{</span>
+
+               <span class="c1">//Load REcaptcha again.</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">'recaptcha'</span><span class="p">);</span>
+
+            <span class="c1">//Check if anything is submitted at all</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'username'</span><span class="p">)</span> <span class="o">!==</span> <span class="k">FALSE</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'password'</span><span class="p">)</span> <span class="o">!==</span> <span class="k">FALSE</span><span class="p">)</span> 
+        <span class="p">{</span>
+                  <span class="c1">//Call to recaptcha to get the data validation set within the class. </span>
+                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">recaptcha</span><span class="o">-&gt;</span><span class="na">recaptcha_check_answer</span><span class="p">();</span>
+
+                    <span class="c1">//Store the username and password for easier access</span>
+                    <span class="nv">$username</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
+                    <span class="nv">$password</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'password'</span><span class="p">);</span>
+
+
+
+                    <span class="k">if</span> <span class="p">(</span><span class="nv">$username</span> <span class="o">==</span> <span class="s2">"user"</span> <span class="o">&amp;&amp;</span> <span class="nv">$password</span> <span class="o">==</span> <span class="s2">"password"</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">recaptcha</span><span class="o">-&gt;</span><span class="na">getIsValid</span><span class="p">())</span> <span class="p">{</span>
+
+                        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="s1">'logged_in'</span><span class="p">,</span><span class="s1">'yes'</span><span class="p">);</span>
+                        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="s1">'user_id'</span><span class="p">,</span><span class="s1">'test'</span><span class="p">);</span>
+
+                        <span class="nx">redirect</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">recaptcha</span><span class="o">-&gt;</span><span class="na">getIsValid</span><span class="p">())</span> <span class="p">{</span>
+                            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_flashdata</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span><span class="s1">'incorrect captcha'</span><span class="p">);</span>
+                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_flashdata</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span><span class="s1">'incorrect credentials'</span><span class="p">);</span>
+                        <span class="p">}</span>
+
+
+
+                        <span class="nx">redirect</span><span class="p">(</span><span class="s1">'login'</span><span class="p">);</span>
+                    <span class="p">}</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span> <span class="p">}</span>
+    <span class="p">}</span><span class="c1">//.submit()</span>
+
+
+<span class="p">}</span>
+</pre></div>
+
+<p>Add this to the login webpage template. </p>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;html&gt;&lt;body&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"login/submit"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"loginerror"</span><span class="nt">&gt;</span> <span class="cp">&lt;?php if ($this-&gt;session-&gt;flashdata('error') !== FALSE) { echo $this-&gt;session-&gt;flashdata('error'); } ?&gt;</span><span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"margin-top: 10px;  float: right;"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;input</span>  <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">placeholder=</span><span class="s">"username"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">placeholder=</span><span class="s">"password"</span><span class="nt">&gt;</span>
+
+
+
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"log in"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"margin-top: 5px;   float: left;"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#test"</span> <span class="na">data-toggle=</span><span class="s">"modal"</span><span class="nt">&gt;</span>Forgotten password<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"&lt;?php echo $this-&gt;recaptcha-&gt;recaptcha_get_signup_url(); ?&gt;"</span> <span class="nt">&gt;</span>Get your API Code HERE<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+    <span class="cp">&lt;?php echo $recaptcha_html; ?&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;/html&gt;&lt;/body&gt;</span>
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Cnordbo/RECaptcha-for-Codeigniter/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Cnordbo/RECaptcha-for-Codeigniter/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Cnordbo/RECaptcha-for-Codeigniter"></a> is maintained by <a href="https://github.com/Cnordbo">Cnordbo</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
