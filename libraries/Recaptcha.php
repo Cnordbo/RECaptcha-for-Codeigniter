@@ -57,8 +57,8 @@ class Recaptcha {
     //Remember to obtain the Public and Private key @ https://www.google.com/recaptcha/admin/create
     protected $public_key = "YOUR PUBLIC KEY";
     protected $privkey = "YOUR PRIVATE KEY";
-    protected $theme = "RECAPTCHA THEME";
-
+    protected $options = array();
+            
     function __construct() {
             log_message('debug', "RECAPTCHA Class Initialized.");
             
@@ -69,7 +69,7 @@ class Recaptcha {
             //load in the values from the config file. 
             $this->public_key   = $this->_ci->config->item('public_key');
             $this->privkey  = $this->_ci->config->item('private_key');
-            $this->theme  = $this->_ci->config->item('recaptcha_theme');
+            $this->options  = $this->_ci->config->item('recaptcha_options');
             
             //Lets do some basic error handling to see if the configuration is A-OK.
             $temp_error_msg = '';
@@ -161,7 +161,11 @@ class Recaptcha {
         if ($error) {
             $errorpart = "&amp;error=" . $error;
         }
-        return '<script type="text/javascript"> var RecaptchaOptions = { theme : "' . $this->theme . '" }; </script>
+        $options = "";
+        foreach($this->options as $key=>$value){
+            $options .= $key.':"'.$value.'", ';
+        }
+        return '<script type="text/javascript"> var RecaptchaOptions = { '.$options.' }; </script>
         		<script type="text/javascript" src="'. $server . '/challenge?k=' . $this->public_key . $errorpart . '"></script>
 
             <noscript>
