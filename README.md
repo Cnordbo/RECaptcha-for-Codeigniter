@@ -1,5 +1,12 @@
-RECaptcha-for-Codeigniter
+RECaptcha v1 integration for Codeigniter
 =========================
+
+NOTICE: 
+Google has stopped supporting reCAPTCHA v1 - all new API keys created on their website will only work for v2 - As v2 is a javascript implementation there seems to be no need for any special handling between the code and codeigniter itself. 
+
+Support for this library will no longer continue as its considered to reach its end of life any moment! Please use the new, more secure, less annoying reCAPTCHA from Google (v2+) https://www.google.com/recaptcha/intro/index.html
+
+Thanks to all the contributors who has participated on this project!
 
 CONTRIBUTE:
 
